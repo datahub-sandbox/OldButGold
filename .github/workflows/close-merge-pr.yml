@@ -1,0 +1,14 @@
+name: Close n Merge
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  fixer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dbg
+        run: |
+          echo ${{ github.event.pull_request.merged }}

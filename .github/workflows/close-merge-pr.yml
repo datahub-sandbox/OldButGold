@@ -16,7 +16,7 @@ jobs:
         id: pr
         run: |
           echo "PUSH_IMAGE=TRUE" >> $GITHUB_OUTPUT
-          if "${{ github.event.pull_request.merged }}" eq "false"
+          if [[ "${{ github.event.pull_request.merged }}" == "false" ]]
           then
             echo "PUSH_IMAGE=FALSE" >> $GITHUB_OUTPUT
           fi

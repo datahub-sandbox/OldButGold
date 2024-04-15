@@ -15,7 +15,7 @@ jobs:
       - name: Catch state
         id: pr
         run: |
-          if ${{ github.event.pull_request.merged }} eq ''
+          if '${{ github.event.pull_request.merged }}' eq ''
           then
             echo "push_image=TRUE" >> "$GITHUB_OUTPUT"
           else

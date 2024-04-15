@@ -7,7 +7,9 @@ on:
   push:
     branches:
       - main
-
+env:
+  PUSH_IMAGE: TRUE
+  
 jobs:
   fixer:
     runs-on: ubuntu-latest
@@ -15,12 +17,10 @@ jobs:
       - name: Catch state
         id: pr
         run: |
-          if "${{ github.event.pull_request.merged }}" eq ""
+          if "${{ github.event.pull_request.merged }}" eq "false"
           then
-            echo "push_image=TRUE" >> "$GITHUB_OUTPUT"
-          else
-            echo "push_image=FALSE" >> "$GITHUB_OUTPUT"
+            echo "PUSH_IMAGE=FALSE" >> $GITHUB_ENV
           fi
       - name: Dbg
         run: |
-          echo ${{ steps.pr.outputs.push_image }}
+          echo ${{ env.PUSH_IMAGE }}

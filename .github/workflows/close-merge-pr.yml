@@ -12,6 +12,15 @@ jobs:
   fixer:
     runs-on: ubuntu-latest
     steps:
+      - name: Catch state
+        id: pr
+        run: |
+          if ${{ github.event.pull_request.merged }} eq ''
+          then
+            echo "push_image=TRUE" >> "$GITHUB_OUTPUT"
+          else
+            echo "push_image=FALSE" >> "$GITHUB_OUTPUT"
+          fi
       - name: Dbg
         run: |
-          echo ${{ github.event.pull_request.merged }}
+          echo ${{ steps.pr.outputs.push_image }}
